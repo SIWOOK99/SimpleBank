@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <link th:href="@{/css/bootstrap.min.css}"
+          href="../css/bootstrap.min.css" rel="stylesheet">
+    <style>
+    .container{
+        max-width: 700px;
+    }
+    .field-error {
+    border-color: #dc3545;
+    color: #dc3545;
+    }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="py-5 text-center">
+        <h2>게시글 수정</h2>
+    </div>
+    <form th:action th:object="${postForm}" method="post">
+        <div>
+            <label for="title">제목</label>
+            <input type="text" id="title" th:field="*{title}" class="form-control"
+                   th:errorclass="field-error">
+            <div class="field-error" th:errors="*{title}" />
+        </div>
+        <div class="mb-3">
+            <label for="content">내용</label>
+            <textarea class="form-control" rows="5"
+                      id="content" name="content"
+                      th:value="*{content}" th:text="*{content}"></textarea>
+        </div>
+        <hr class="my-4">
+
+        <button class="btn btn-primary" type="submit">
+            수정 완료
+        </button>
+
+        <button class="btn btn-secondary"
+                th:onclick="|location.href='@{/board/{postId}(postId=${postId})}'|"
+                type="button">취소
+        </button>
+
+    </form>
+
+</div>
+</body>
